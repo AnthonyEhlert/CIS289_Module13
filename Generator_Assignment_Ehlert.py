@@ -34,9 +34,9 @@ def is_prime(num, prime_list):
     :param prime_list: list of prime Fibonacci numbers
     :return: False is number is not prime
     """
-    #time.sleep(.005)
+    #time.sleep(.1)
     with thread_lock:
-        #print("Number of Threads running: " + str(threading.active_count()))
+        print("Number of Threads running: " + str(threading.active_count()))
         if (num <= 1):
             return False
         if (num == 2):
@@ -52,6 +52,7 @@ def is_prime(num, prime_list):
 
         prime_list.append(num)
 
+
 if __name__ == '__main__':
     #### Create a list to store the first 4 Fibonacci numbers that are also prime
     start = time.time()
@@ -60,32 +61,53 @@ if __name__ == '__main__':
     fib_generator = fibonacci_generator()
     while len(prime_fib_nums_list) < 4:
         cur_num = next(fib_generator)
-        prime_thread = threading.Thread(target=is_prime, args=(cur_num, prime_fib_nums_list))
-        prime_thread.start()
-        prime_threads.append(prime_thread)
-    # for thread in prime_threads:
-    #     thread.join()
+        if is_prime(cur_num, prime_fib_nums_list):
+            pass
+            #prime_fib_nums_list.append(cur_num)
+    # while len(prime_fib_nums_list) < 4:
+    #     num_of_threads = 4
+    #     for i in range(num_of_threads):
+    #         cur_num = next(fib_generator)
+    #         prime_thread = threading.Thread(target=is_prime, args=(cur_num, prime_fib_nums_list))
+    #         prime_thread.start()
+    #         prime_threads.append(prime_thread)
+    #     for thread in prime_threads:
+    #         thread.join()
 
 
-    #### Do this again (appending 4 more fib primes to your list) so you end up with 8 Fibonacci primes)
+    # #### Do this again (appending 4 more fib primes to your list) so you end up with 8 Fibonacci primes)
     while len(prime_fib_nums_list) < 8:
         cur_num = next(fib_generator)
-        prime_thread = threading.Thread(target=is_prime, args=(cur_num, prime_fib_nums_list))
-        prime_thread.start()
-        prime_threads.append(prime_thread)
-    # for thread in prime_threads:
-    #     thread.join()
+        if is_prime(cur_num, prime_fib_nums_list):
+            pass
+            #prime_fib_nums_list.append(cur_num)
+        # while len(prime_fib_nums_list) < 8:
+        #     num_of_threads = 4
+        #     for i in range(num_of_threads):
+        #         cur_num = next(fib_generator)
+        #         prime_thread = threading.Thread(target=is_prime, args=(cur_num, prime_fib_nums_list))
+        #         prime_thread.start()
+        #         prime_threads.append(prime_thread)
+        #     for thread in prime_threads:
+        #         thread.join()
 
     #### Do it one last time but only get three fib primes the final time (This may be a bit slower since numbers are so big)
     while len(prime_fib_nums_list) < 11:
         cur_num = next(fib_generator)
-        prime_thread = threading.Thread(target=is_prime, args=(cur_num, prime_fib_nums_list))
-        prime_thread.start()
-        prime_threads.append(prime_thread)
+        if is_prime(cur_num, prime_fib_nums_list):
+            pass
+            #prime_fib_nums_list.append(cur_num)
+    # while len(prime_fib_nums_list) < 11:
+    #     num_of_threads = 4
+    #     for i in range(num_of_threads):
+    #         cur_num = next(fib_generator)
+    #         prime_thread = threading.Thread(target=is_prime, args=(cur_num, prime_fib_nums_list))
+    #         prime_thread.start()
+    #         prime_threads.append(prime_thread)
+    #     for thread in prime_threads:
+    #         thread.join()
 
-    for thread in prime_threads:
-        thread.join()
     end = time.time()
     #### Print the list to the console
     print("The first 11 prime numbers in the Fibonacci sequence are:\n" + str(prime_fib_nums_list))
-    print(end - start)
+    print(end-start)
