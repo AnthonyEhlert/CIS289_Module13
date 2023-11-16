@@ -52,22 +52,35 @@ def stream_two_books(book_stream_queue):
     thread2.start()
     thread1.join()
     thread2.join()
-    while not book_stream_queue.empty():
-        print(book_stream_queue.get())
-    print("threads complete")
+    # while not book_stream_queue.empty():
+    #     print(book_stream_queue.get())
+    # print("threads complete")
 
 
 def read_two_books_stream(book_stream_queue):
     time.sleep(4)
-    pass
+    dracula_count = 0
+    count = 0
+    while not book_stream_queue.empty():
+        book_dict = book_stream_queue.get()
+        for key in book_dict:
+            if key == 'dracula':
+                dracula_count += 1
+            else:
+                count += 1
+            print(count)
+            print('Dracula count = ' + str(dracula_count))
+
+
 
 if __name__ == "__main__":
     book_stream_queue = multiprocessing.Queue()
     p1 = Process(target=stream_two_books,args=(book_stream_queue,))
-    #p2 = Process(target=read_two_books_stream,args=(book_stream_queue,))
+    p2 = Process(target=read_two_books_stream,args=(book_stream_queue,))
     p1.start()
-    #p2.start()
+    p2.start()
     p1.join()
+    #p2.join()
 
 #### Run code as it is to see queue get filled & printed out. You can see ea. word of the books is tagged w/ the book title.
 
