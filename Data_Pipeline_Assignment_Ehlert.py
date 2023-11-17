@@ -75,10 +75,11 @@ def read_two_books_stream(book_stream_queue):
                 book_counts['dracula'] += 1
             else:
                 book_counts['two_cities'] += 1
-
-        #time.sleep(.00001)
         print(f"There are {book_counts['dracula']} words in Dracula")
         print(f"There are {book_counts['two_cities']} words in A Tale of Two Cities")
+        #time.sleep(.00001)
+    #print(f"There are {book_counts['dracula']} words in Dracula")
+    #print(f"There are {book_counts['two_cities']} words in A Tale of Two Cities")
 
 
 if __name__ == "__main__":
